@@ -1,0 +1,112 @@
+Steps:-
+
+1.Header files
+2.Validation function Definition
+3.User input & function call
+4.Stylesheet define
+5.Button Styling
+
+
+//Header files
+import React from 'react';
+import {TextInput, View, Touchopacity, Stylesheet} from 'react-native';
+
+export default class Registeration extends React. Component{
+constructor(props) {
+super(props) ;
+
+this. state={
+email:' ', email Error:null, password:' ', passwordError:null, };
+
+//Validation Function for Email & Password
+
+validate = () =>{
+let isValidated = true;
+let {email, password} = this. state;
+if (email == ' ' ) {
+isValidated = false;
+this.setState ({
+emailError: 'Empty email field' })
+}
+
+if (email! =' ' && (!(/^w+.)*@\w+)+$>test(email)))) {
+isValidated = false;
+this. setState({
+emailError: 'Email Invalid' }
+else isValidated = true;
+if (password == ' ')
+isValidated = false
+this. setState ({
+passwordError:'Empty password field' })
+}
+return isValidated;
+}
+
+// Submit Function
+onSubmit = () => {
+alert("Your form is submitted Thank you for your success full registration")
+}
+
+// Salary validation function
+checkSalary(obj)= {
+if(! isNaN(obj.salary.value) && obj.salary.value >=0 && obj.salary.value.length >0) {
+return true;
+}else {
+alert("Enter Indian Salary format")
+return false;
+}
+}
+
+render() {
+
+// Register form design from User End.
+let { passwordError, emailError, password ,email} = this.state;
+return (
+<View style ={styles.regform} >
+<TextInput style={styles.textinput} placeholder=Username " value={username}
+underlineColorAndroid={'transparent'}/>
+<TextInput style={styles.textinput} placeholder="Password " value={password}
+errorMessage={errorPass}
+onValidate="return check Passl (this) " underlineColorAndroid={'transparent'}/>
+<TextInput style={styles.textinput} placeholder="Email " value={email}
+errorMessage={emailError}
+onValidate="return check Email (this) " underlineColorAndroid={'transparent'}/>
+<TextInput style={styles.textinput} placeholder="Phone " value={number}
+onPhone="return check phone (this) "
+underlineColorAndroid={'transparent'}/>
+<TextInput style={styles.textinput} placeholder="Gender " value={Gender}
+underlineColorAndroid={'transparent'}/>
+<TextInput style={styles.textinput} placeholder="Address " value ={address}
+underlineColorAndroid={'transparent'}/>
+<TextInput style={styles.textinput} placeholder="Salary " value={salary}
+onSubmit="return check Salary (this) " underlineColorAndroid={'transparent'}/>
+<Button title = 'SUBMIT' onPress={this.onSubmit)
+containerStyle={{marginTop:20})
+buttonStyle={{
+backgroundcolor:'red', borderWidth:1, height:30, width::50, borderRadius:5
+}}
+/>
+</View>
+}
+
+// Styling form
+const styles = Stylesheet. create({
+regform:{
+alignSelf:'stretch', }
+textInput:{
+height :30, color:blue, borderBottomColor:'Green's
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
