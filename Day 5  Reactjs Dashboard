@@ -1,0 +1,93 @@
+import React, { useState } from 'react';
+import './Dashboard.css';
+
+const Dashboard = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [plants, setPlants] = useState([
+        { id: 101, name: 'Rose', isEditing: false },
+        { id: 102, name: 'Sunflower', isEditing: false }
+    ]);
+    const [selected, setSelected] = useState([]);
+    const [editText, setEditText] = useState({});
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value.toLowerCase());
+    };
+
+    const toggleSelectAll = (event) => {
+        setSelected(event.target.checked ? plants.map(p => p.id) : []);
+    };
+
+    const toggleSelect = (id) => {
+        setSelected(selected.includes(id) ? selected.filter(s => s !== id) : [...selected, id]);
+    };
+
+    const handleEdit = (id, name) => {
+        setPlants(plants.map(p => p.id === id ? { ...p, isEditing: true } : p));
+        setEditText({ ...editText, [id]: name });
+    };
+
+    const handleUpdate = (id) => {
+        setPlants(plants.map(p => p.id === id ? { ...p, name: editText[id], isEditing: false } : p));
+    };
+
+    const handleDelete = (id) => {
+        setPlants(plants.filter(p => p.id !== id));
+    };
+
+    return (
+        <div className="dashboard">
+            <div className="sidebar">
+                <ul>
+                    <li>Dashboard</li>
+                    <li>Plants</li>
+                    <li>Settings</li>
+                    <li>Logout</li>
+                </ul>
+            </div>
+            <div className="content">
+                <h2>Plant Management</h2>
+                <input type="text" placeholder="Search by name..." onChange={handleSearch} />
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" onChange={toggleSelectAll} /></th>
+                            <th>Plant ID</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {plants.filter(p => p.name.toLowerCase().includes(searchTerm)).map(plant => (
+                            <tr key={plant.id}>
+                                <td><input type="checkbox" checked={selected.includes(plant.id)} onChange={() => toggleSelect(plant.id)} /></td>
+                                <td>{plant.id}</td>
+                                <td>
+                                    {plant.isEditing ? (
+                                        <input 
+                                            type="text" 
+                                            value={editText[plant.id] || ''} 
+                                            onChange={(e) => setEditText({ ...editText, [plant.id]: e.target.value })} 
+                                        />
+                                    ) : (
+                                        plant.name
+                                    )}
+                                </td>
+                                <td>
+                                    {plant.isEditing ? (
+                                        <button onClick={() => handleUpdate(plant.id)}>Update</button>
+                                    ) : (
+                                        <button onClick={() => handleEdit(plant.id, plant.name)}>Edit</button>
+                                    )}
+                                    <button onClick={() => handleDelete(plant.id)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
+
+export default Dashboard;
