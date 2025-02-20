@@ -91,3 +91,94 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 200px;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.sidebar ul li:hover {
+    background: #34495e;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background: #ecf0f1;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    text-align: left;
+}
+
+th {
+    background: #3498db;
+    color: white;
+}
+
+button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:nth-child(1) {
+    background: #f1c40f;
+}
+
+button:nth-child(2) {
+    background: #e74c3c;
+    color: white;
+}
+
+button:nth-child(3) {
+    background: #2ecc71;
+    color: white;
+}
+
