@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            height: 100vh;
+            padding-top: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .sidebar ul li:hover {
+            background: #555;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .actions button {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li>Dashboard</li>
+            <li>Plants</li>
+            <li>Settings</li>
+            <li>Logout</li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>Plant Management</h2>
+        <input type="text" id="search" placeholder="Search by name..." onkeyup="searchTable()">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="selectAll"></th>
+                    <th>Plant ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" class="rowCheckbox"></td>
+                    <td>101</td>
+                    <td>Rose</td>
+                    <td class="actions">
+                        <button onclick="editRow(this)">Edit</button>
+                        <button onclick="deleteRow(this)">Delete</button>
+                        <button onclick="updateRow(this)">Update</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="rowCheckbox"></td>
+                    <td>102</td>
+                    <td>Sunflower</td>
+                    <td class="actions">
+                        <button onclick="editRow(this)">Edit</button>
+                        <button onclick="deleteRow(this)">Delete</button>
+                        <button onclick="updateRow(this)">Update</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.getElementById("selectAll").addEventListener("change", function() {
+            document.querySelectorAll(".rowCheckbox").forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+        
+        function searchTable() {
+            let input = document.getElementById("search").value.toLowerCase();
+            document.querySelectorAll("tbody tr").forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(input) ? "" : "none";
+            });
+        }
+        
+        function editRow(button) {
+            alert("Edit functionality to be implemented");
+        }
+        
+        function deleteRow(button) {
+            button.closest("tr").remove();
+        }
+        
+        function updateRow(button) {
+            alert("Update functionality to be implemented");
+        }
+    </script>
+</body>
+</html>
