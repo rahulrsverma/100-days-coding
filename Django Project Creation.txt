@@ -1,0 +1,10 @@
+Create Django Project
+
+Install Django → pip install django
+Create project → django-admin startproject myproject
+Run server → python manage.py runserver
+Create app → python manage.py startapp tracker
+Define models → models.py
+Apply migrations → makemigrations & migrate
+Create views & URLs → views.py & urls.py
+Run server & test → Visit http://127.0.0.1:8000/
