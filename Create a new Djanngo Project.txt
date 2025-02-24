@@ -1,0 +1,167 @@
+Steps to Create a Django Project
+Follow these steps to create a Django project from scratch.
+
+📌 Step 1: Install Django
+If you haven't installed Django yet, install it using pip:
+
+sh
+Copy
+Edit
+pip install django
+Verify the installation:
+
+sh
+Copy
+Edit
+django-admin --version
+📌 Step 2: Create a Django Project
+Run the following command to create a new project:
+
+sh
+Copy
+Edit
+django-admin startproject myproject
+This will create a directory structure like:
+
+markdown
+Copy
+Edit
+myproject/
+│── manage.py
+│── myproject/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   ├── wsgi.py
+manage.py – Command-line utility for Django.
+settings.py – Project settings.
+urls.py – Routes and URL configurations.
+wsgi.py/asgi.py – Entry points for web servers.
+📌 Step 3: Run the Django Server
+Navigate to the project folder:
+
+sh
+Copy
+Edit
+cd myproject
+Run the development server:
+
+sh
+Copy
+Edit
+python manage.py runserver
+Output:
+
+pgsql
+Copy
+Edit
+Watching for file changes with StatReloader
+Django version X.X.X, using settings 'myproject.settings'
+Starting development server at http://127.0.0.1:8000/
+Open http://127.0.0.1:8000/ in your browser to see the Django welcome page.
+
+📌 Step 4: Create a Django App
+Inside your project folder, create an app (e.g., tracker):
+
+sh
+Copy
+Edit
+python manage.py startapp tracker
+This will create:
+
+markdown
+Copy
+Edit
+tracker/
+│── migrations/
+│── __init__.py
+│── admin.py
+│── apps.py
+│── models.py
+│── tests.py
+│── views.py
+Add the app to INSTALLED_APPS in settings.py:
+
+python
+Copy
+Edit
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'tracker',  # Add your app
+]
+📌 Step 5: Define a Model
+Edit tracker/models.py:
+
+python
+Copy
+Edit
+from django.db import models
+
+class GPSData(models.Model):
+    vehicle_number = models.CharField(max_length=20)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+Run migrations:
+
+sh
+Copy
+Edit
+python manage.py makemigrations
+python manage.py migrate
+📌 Step 6: Create a View
+Edit tracker/views.py:
+
+python
+Copy
+Edit
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Hello, Django!")
+📌 Step 7: Configure URLs
+Edit tracker/urls.py (create it if missing):
+
+python
+Copy
+Edit
+from django.urls import path
+from .views import home
+
+urlpatterns = [
+    path('', home, name='home'),
+]
+Edit myproject/urls.py:
+
+python
+Copy
+Edit
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('tracker.urls')),  # Include app URLs
+]
+📌 Step 8: Run the Server
+sh
+Copy
+Edit
+python manage.py runserver
+Go to http://127.0.0.1:8000/ → You should see "Hello, Django!"
+
+✅ Summary
+Install Django → pip install django
+Create project → django-admin startproject myproject
+Run server → python manage.py runserver
+Create app → python manage.py startapp tracker
+Define models → models.py
+Apply migrations → makemigrations & migrate
+Create views & URLs → views.py & urls.py
+Run server & test → Visit http://127.0.0.1:8000/
